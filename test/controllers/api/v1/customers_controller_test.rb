@@ -91,4 +91,42 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 2, json_response.count
   end
+
+  test "#invoices returns invoices associated with the customer" do
+    customer = Customer.create(first_name: "Ricky", last_name: "Bobby")
+    merchant = Merchant.create(name: "Damm Music Center")
+    invoice = Invoice.create(customer_id: customer.id,
+                             merchant_id: merchant.id, status: "incomplete")
+    invoice2 = Invoice.create(customer_id: customer.id,
+                             merchant_id: merchant.id, status: "complete")
+
+    get :invoices, format: :json, id: customer.id
+
+    assert_response :success
+    assert_equal 2, json_response.count
+    assert_equal invoice[:id], json_response.first["id"]
+  end
+
+  test "#transactions returns the transactions associated with the customer" do
+    customer = Customer.create(first_name: "Ricky", last_name: "Bobby")
+    merchant = Merchant.create(name: "Damm Music Center")
+    invoice = Invoice.create(customer_id: customer.id,
+                             merchant_id: merchant.id, status: "incomplete")
+    invoice2 = Invoice.create(customer_id: customer.id,
+                              merchant_id: merchant.id, status: "complete")
+    transaction = Transaction.create(invoice_id: invoice.id,
+                                     credit_card_number: "12345",
+                                     credit_card_expiration_date: "11/20",
+                                     result: "failed")
+    transaction2 = Transaction.create(invoice_id: invoice.id,
+                                     credit_card_number: "12345",
+                                     credit_card_expiration_date: "11/20",
+                                     result: "success")
+    get :transactions, format: :json, id: customer.id
+
+    assert_response :success
+    assert_equal 2, json_response.count
+    assert_equal transaction.id, json_response.first["id"]
+    assert_equal transaction2.id, json_response.last["id"]
+  end
 end

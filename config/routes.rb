@@ -12,6 +12,8 @@ Rails.application.routes.draw do
       get "/customers/find", to: "customers#find", defaults: {format: 'json'}
       get "/customers/find_all", to: "customers#find_all", defaults: {format: 'json'}
       get "/customers/random", to: "customers#random", defaults: {format: 'json'}
+      get "/customers/:id/invoices", to: "customers#invoices", defaults: {format: 'json'}
+      get "/customers/:id/transactions", to: "customers#transactions", defaults: {format: 'json'}
       resources :customers, except: [:new, :edit], defaults: {format: 'json'}
 
       get "/items/find", to: "items#find", defaults: {format: 'json'}
@@ -41,6 +43,7 @@ Rails.application.routes.draw do
       get "/transactions/find", to: "transactions#find", defaults: {format: 'json'}
       get "/transactions/find_all", to: "transactions#find_all", defaults: {format: 'json'}
       get "/transactions/random", to: "transactions#random", defaults: {format: 'json'}
+      get "/transactions/:id/invoice", to: "transactions#invoice", defaults: {format: 'json'}
       resources :transactions, except: [:new, :edit], defaults: {format: 'json'}
     end
   end
