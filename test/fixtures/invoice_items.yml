@@ -11,3 +11,9 @@ two:
   invoice_id:
   quantity: 2
   unit_price: 999
+
+one:
+  item_id:
+  invoice_id:
+  quantity: 20
+  unit_price: 1000
