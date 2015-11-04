@@ -46,4 +46,36 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 2, json_response.count
   end
+
+  test "#invoice returns the invoice associated with the invoice_item" do
+    customer = Customer.create(first_name: "Ricky", last_name: "Bobby")
+    merchant = Merchant.create(name: "Damm Music Center")
+    invoice = Invoice.create(customer_id: customer.id,
+                             merchant_id: merchant.id, status: "incomplete")
+    item = Item.create(name: "Guitar", description: "Electric", unit_price: 100,
+                       merchant_id: merchant.id)
+    invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id,
+                                       quantity: 20, unit_price: 100)
+
+    get :invoice, format: :json, id: invoice_item.id
+
+    assert_response :success
+    assert_equal invoice[:status], json_response["status"]
+  end
+
+  test "#item returns the item associated with the invoice_item" do
+    customer = Customer.create(first_name: "Ricky", last_name: "Bobby")
+    merchant = Merchant.create(name: "Damm Music Center")
+    invoice = Invoice.create(customer_id: customer.id,
+                             merchant_id: merchant.id, status: "incomplete")
+    item = Item.create(name: "Guitar", description: "Electric", unit_price: 100,
+                       merchant_id: merchant.id)
+    invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id,
+                                       quantity: 20, unit_price: 100)
+
+    get :item, format: :json, id: invoice_item.id
+
+    assert_response :success
+    assert_equal item[:name], json_response["name"]
+  end
 end
