@@ -11,3 +11,9 @@ two:
   credit_card_number: "12345"
   credit_card_expiration_date: "04/05"
   result: failed
+
+three:
+  invoice_id:
+  credit_card_number: "1234567"
+  credit_card_expiration_date: "11/25"
+  result: success
