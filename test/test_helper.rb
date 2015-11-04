@@ -13,4 +13,27 @@ class ActiveSupport::TestCase
   def json_response
     JSON.parse(response.body)
   end
+
+  # def create_invoices
+  # end
+  #
+  # def invoice1
+  #   @invoice1 = Invoice.create(customer_id: customer1.id,
+  #                              merchant_id: merchant1.id,
+  #                              status: "incomplete")
+  # end
+  #
+  # def invoice2
+  #   @invoice = Invoice.create(customer_id: customer.id,
+  #                             merchant_id: merchant.id,
+  #                             status: "complete")
+  # end
+  #
+  # def merchant1
+  #   @merchant1 = Merchant.create(name: "Damm Music Center")
+  # end
+  #
+  # def customer1
+  #   @customer = Customer.create(first_name: "Ricky", last_name: "Bobby")
+  # end
 end
