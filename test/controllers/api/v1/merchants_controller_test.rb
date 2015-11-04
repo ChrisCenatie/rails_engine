@@ -74,4 +74,32 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal 2, json_response.count
   end
+
+  test "#items returns all items associated with merchant" do
+    merchant = Merchant.create(name: "Damm Music Center")
+    item1    = Item.create(name: "Guitar", description: "Electric",
+                           unit_price: 100, merchant_id: merchant.id)
+    item2    = Item.create(name: "Bass", description: "Upright",
+                           unit_price: 200, merchant_id: merchant.id)
+    get :items, format: :json, id: merchant.id
+
+    assert_response :success
+    assert_equal 2, json_response.count
+    assert_equal item1[:name], json_response.first["name"]
+  end
+
+  test "#invoices returns all items associated with merchant" do
+    customer = Customer.create(first_name: "Ricky", last_name: "Bobby")
+    merchant = Merchant.create(name: "Damm Music Center")
+    invoice1 = Invoice.create(customer_id: customer.id,
+                              merchant_id: merchant.id, status: "incomplete")
+    Invoice.create(customer_id: customer.id, merchant_id: merchant.id,
+                   status: "complete")
+
+    get :invoices, format: :json, id: merchant.id
+
+    assert_response :success
+    assert_equal 2, json_response.count
+    assert_equal invoice1[:status], json_response.first["status"]
+  end
 end
