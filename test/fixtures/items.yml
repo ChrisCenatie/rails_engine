@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Guitar
+  description: Electric
+  unit_price: 100
+  merchant_id:
+
+two:
+  name: Bass
+  description: Upright
+  unit_price: 999
+  merchant_id:
+
+Three:
+  name: Guitar
+  description: Seven String
+  unit_price: 1000
+  merchant_id:

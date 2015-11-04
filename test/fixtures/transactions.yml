@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invoice_id:
+  credit_card_number: "1234"
+  credit_card_expiration_date: "11/20"
+  result: success
+
+two:
+  invoice_id:
+  credit_card_number: "12345"
+  credit_card_expiration_date: "04/05"
+  result: failed

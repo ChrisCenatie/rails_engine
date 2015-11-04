@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: Ricky
+  last_name: Bobby
+
+two:
+  first_name: Jerry
+  last_name: McGuire
+
+three:
+  first_name: Ricky
+  last_name: Bobby
