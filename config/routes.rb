@@ -22,6 +22,11 @@ Rails.application.routes.draw do
       get "/invoices/find", to: "invoices#find", defaults: {format: 'json'}
       get "/invoices/find_all", to: "invoices#find_all", defaults: {format: 'json'}
       get "/invoices/random", to: "invoices#random", defaults: {format: 'json'}
+      get "/invoices/:id/transactions", to: "invoices#transactions",defaults: { :format => 'json' }
+      get "/invoices/:id/invoice_items", to: "invoices#invoice_items",defaults: { :format => 'json' }
+      get "/invoices/:id/items", to: "invoices#items",defaults: { :format => 'json' }
+      get "/invoices/:id/customer", to: "invoices#customer",defaults: { :format => 'json' }
+      get "/invoices/:id/merchant", to: "invoices#merchant",defaults: { :format => 'json' }
       resources :invoices, except: [:new, :edit], defaults: {format: 'json'}
 
       get "/invoice_items/find", to: "invoice_items#find", defaults: {format: 'json'}
