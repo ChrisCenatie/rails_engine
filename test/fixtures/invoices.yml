@@ -3,9 +3,14 @@
 one:
   customer_id:
   merchant_id:
-  status: Complete
+  status: iomplete
 
 two:
-  customer_id: 
+  customer_id:
   merchant_id:
-  status: Incomplete
+  status: incomplete
+
+three:
+  customer_id:
+  merchant_id:
+  status: incomplete
