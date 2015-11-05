@@ -1,5 +1,4 @@
 class InvoiceItem < ActiveRecord::Base
-  default_scope{order(:id)}
   belongs_to :item
   belongs_to :invoice
 
@@ -11,6 +10,6 @@ class InvoiceItem < ActiveRecord::Base
   protected
 
   def money_converter
-    self.unit_price = (self.unit_price/100)
+    self.unit_price = (self.unit_price / 100.00)
   end
 end
