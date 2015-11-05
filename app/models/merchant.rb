@@ -24,20 +24,26 @@ class Merchant < ActiveRecord::Base
            .order('SUM(quantity) DESC').group(:merchant_id).sum(:quantity).keys
   end
 
-  def self.successful_invoice_ids
-    Invoice.joins(:transactions).merge(Transaction.successful)
-           .pluck(:invoice_id)
+  def self.revenue(merchant_id)
+    InvoiceItem.joins(:transactions)
+               .where("transactions.result" => "success").joins(:merchants)
+               .where("merchants.id" => merchant_id)
+               .sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
-  # def self.most_items(_sellers)
-  #   ids
-  # end
-  #
-  # def self.merchant_quantities
-  #   Merchant.joins(:invoice_items).group(:quantity).count
-  # end
-  #
-  # def self.ids(top_sellers)
-  #   merchant_quantities.sort_by{|key, value| value}.reverse
-  # end
+  def customers_with_pending_invoices
+    customer_ids = invoices.unpaid.joins(:customer).pluck(:customer_id)
+    Customer.where(id: customer_ids)
+  end
+
+  private
+
+    def self.successful_invoice_ids
+      Invoice.joins(:transactions).merge(Transaction.successful)
+             .pluck(:invoice_id)
+    end
+
+    def self.pending_invoice_ids
+      Invoice.all.pluck(:id) - successful_invoice_ids
+    end
 end

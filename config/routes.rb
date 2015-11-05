@@ -8,7 +8,9 @@ Rails.application.routes.draw do
       get "/merchants/:id/items", to: "merchants#items",defaults: { :format => 'json' }
       get "/merchants/:id/invoices", to: "merchants#invoices",defaults: { :format => 'json' }
       get "/merchants/most_items", to: "merchants#most_items",defaults: { :format => 'json' }
+      get "/merchants/:id/revenue", to: "merchants#revenue",defaults: { :format => 'json' }
       get "/merchants/:id/favorite_customer", to: "merchants#favorite_customer",defaults: { :format => 'json' }
+      get "/merchants/:id/customers_with_pending_invoices", to: "merchants#customers_with_pending_invoices",defaults: { :format => 'json' }
       resources :merchants, except: [:new, :edit], defaults: {format: 'json'}
 
       get "/customers/find", to: "customers#find", defaults: {format: 'json'}
