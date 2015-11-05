@@ -28,6 +28,14 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.find(params[:id]).invoices
   end
 
+  def favorite_customer
+    respond_with Merchant.find(params[:id]).favorite_customer
+  end
+
+  def most_items
+    respond_with Merchant.most_items(params[:quantity])
+  end
+
   private
 
     def merchant_params
