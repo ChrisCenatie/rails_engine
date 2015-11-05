@@ -36,6 +36,15 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.most_items(params[:quantity])
   end
 
+  def customers_with_pending_invoices
+    respond_with Merchant.find(params[:id]).customers_with_pending_invoices
+  end
+
+  def revenue
+    revenue = Merchant.revenue(params[:id])
+    respond_with({"revenue" => revenue.to_s})
+  end
+
   private
 
     def merchant_params

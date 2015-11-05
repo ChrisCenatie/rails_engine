@@ -38,7 +38,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
 
     def serialize_unit_price
       if params[:unit_price]
-        params[:unit_price] = params[:unit_price].sub('.','')
+        params[:unit_price] = params[:unit_price].to_f
       end
     end
 

@@ -5,4 +5,8 @@ class Invoice < ActiveRecord::Base
 
   has_many :invoice_items
   has_many :items, through: :invoice_items
+
+  scope :unpaid, -> { joins(:transactions)
+                      .where(transactions: {result: "failed"})
+                      .distinct}
 end

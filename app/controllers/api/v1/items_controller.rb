@@ -31,14 +31,14 @@ class Api::V1::ItemsController < ApplicationController
   private
 
     def item_params
-      serialize_unit_price
+      # serialize_unit_price
       params.permit(:id, :name, :description, :unit_price, :merchant_id,
                     :created_at, :updated_at)
     end
 
-    def serialize_unit_price
-      if params[:unit_price]
-        params[:unit_price] = params[:unit_price].sub('.','')
-      end
-    end
+    # def serialize_unit_price
+    #   if params[:unit_price]
+    #     params[:unit_price] = params[:unit_price].sub('.','')
+    #   end
+    # end
 end
